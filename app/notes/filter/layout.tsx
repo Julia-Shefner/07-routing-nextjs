@@ -5,7 +5,7 @@ type NotesLayoutProps = {
   sidebar: React.ReactNode;
 };
 
-const NotesLayout = ({ children, sidebar }: NotesLayoutProps) => {
+const NotesLayout = ({ sidebar, children }: NotesLayoutProps) => {
   return (
     <section className={css.container}>
       <aside className={css.sidebar}>{sidebar}</aside>
