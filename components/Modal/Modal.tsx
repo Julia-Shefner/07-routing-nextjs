@@ -29,6 +29,7 @@ const Modal = ({ onClose, children }: ModalProps) => {
       document.body.style.overflow = "";
     };
   }, [onClose]);
+
   return createPortal(
     <div
       className={css.backdrop}

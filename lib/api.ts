@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Note, CreateNote } from "@/types/note";
+import type { Note, CreateNote, NoteTag } from "@/types/note";
 
 interface NotesHttpResponse {
   notes: Note[];
@@ -7,7 +7,8 @@ interface NotesHttpResponse {
 }
 interface FetchNotesParams {
   page: number;
-  search: string;
+  search?: string;
+  tag?: string;
 }
 
 const myKey = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
@@ -19,14 +20,17 @@ const axiosInstance = axios.create({
 export const fetchNotes = async ({
   page,
   search,
+  tag,
 }: FetchNotesParams): Promise<NotesHttpResponse> => {
   const response = await axiosInstance.get<NotesHttpResponse>("/notes", {
     params: {
       page,
       perPage: 12,
-      search,
+      ...(search && { search }),
+      ...(tag && { tag }),
     },
   });
+  console.log(response.data);
   return response.data;
 };
 
